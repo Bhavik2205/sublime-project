@@ -1,7 +1,6 @@
 import Customer from "../models/customers.js";
 import mongoose from "mongoose";
 import express from "express";
-import { stringify } from "flatted";
 
 const router = express.Router();
 
@@ -40,25 +39,14 @@ export const createCustomerData = async(req, res) => {
 
 //To get a customer count in a particular city
 export const customerCount = async(req, res) => {
-    //const c = req.query.city; 
+    const c = req.query.city; 
         try {
             //const total = await Customer.countDocuments({city: c});
             const cities = await Customer.aggregate([ {$group : {_id:"$city", count:{$sum:1}}} ]);
             res.status(200).json({cities});
-            //res.status(200).json(`Total Customers present in ${c} is ${total} \n`, cities);
         } catch (error) {
             res.status(409).json({message: error.message});
         }
-};
-
-//To search a customer by first_Name, last_Name and city with pagination
-export const searchP = async(req, res) => {
-   const first_Name = req.query.firstName;
-   try {
-       res.json(first_Name);
-   } catch (error) {
-       console.log(error.message);
-   }
 };
 
 export default router;
