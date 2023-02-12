@@ -20,6 +20,6 @@
     "express": "^4.17.3",
     "flatted": "^3.2.5",
     "mongoose": "^6.3.0",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.20"
   }
 }
